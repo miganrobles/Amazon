@@ -14,9 +14,4 @@ public class FurgonetaGrande extends VehiculoPesado
     {
         super(marca, antiguedad, km, peso);
     }
-    
-    public boolean cumpleMedidas()
-    {
-        return false;
-    }
 }

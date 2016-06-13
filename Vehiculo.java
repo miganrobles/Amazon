@@ -19,7 +19,10 @@ public abstract class Vehiculo
     private Marca marca;
     // Kilometros del vehiculo
     private int km;
-    
+
+    /**
+     * Constructor for objects of class Vehiculo
+     */
     public Vehiculo(Marca marca, int antiguedad, int km) 
     {
         codVehiculo = genCodVehiculos++;
@@ -27,24 +30,39 @@ public abstract class Vehiculo
         this.marca = marca;
         this.antiguedad = antiguedad;
     }
-    
+
+    /**
+     * Devuelve la marca del vehiculo
+     */
     public Marca getMarca()
     {
         return marca;
     }
-    
+
+    /**
+     * Devuelve el codigo del vehiculo
+     */
     public int getCodVehiculo()
     {
         return codVehiculo;
     }
-    
+
+    /**
+     * Devuelve la antigüedad del vehiculo
+     */
     public int getAntiguedad()
     {
         return antiguedad;
     }
-    
+
+    /**
+     * Metodo abstract para los datos del vehiculo
+     */
     public abstract int[] getDatos();
-  
+
+    /**
+     * Devuelve los km del vehiculo
+     */
     public int getKm()
     {
         return km;

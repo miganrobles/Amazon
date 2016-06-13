@@ -14,15 +14,21 @@ public class Camion extends VehiculoPesado implements CumpleMedidas
     {
         super(marca, antiguedad, km, peso);
     }
-    
+
+    /**
+     * Devuelve true si es articualdo o false si no
+     */
     public boolean esArticulado()
     {
         return (getMarca() == Marca.FIAT || getMarca() == Marca.FORD);
     }
-    
+
+    /**
+     * Devuelve true si el camión cumple las medidas de seguridad o false si no
+     */
     @Override
     public boolean cumpleMedidas()
     {
-        return ((esArticulado() && getPeso() < 3000) || (!esArticulado() && getPeso() < 2000));
+        return ((esArticulado() && getPeso() < CumpleMedidas.PESO_ARTICULADOS) || (!esArticulado() && getPeso() < PESO_NO_ARTICULADOS));
     }
 }

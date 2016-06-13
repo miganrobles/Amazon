@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 /**
  * Write a description of class Flota here.
  * 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Flota
 {
+    // Guarda los vehiculos de la flota
     private ArrayList<Vehiculo> vehiculos;
 
     /**
@@ -30,15 +32,35 @@ public class Flota
      */
     public boolean removeVehiculo(int id)
     {
-        boolean eliminado = false;
-        for (int i = 0; i < vehiculos.size() && !eliminado; i++)
-        {
-            Vehiculo vehiculo = vehiculos.get(i);
+        return vehiculos.remove(buscaVehiculo(id));
+    }
+
+    /**
+     * Busca un vehículo en la flota por su id
+     * Si lo encuentra devuelve el vehiculo y si no devuelve null
+     */
+    private Vehiculo buscaVehiculo(int id)
+    {
+        Vehiculo vehiculoBuscado = null;
+        for (Vehiculo vehiculo : vehiculos) {
             if (vehiculo.getCodVehiculo() == id) {
-                eliminado = vehiculos.remove(vehiculo);
+                vehiculoBuscado = vehiculo;
             }
         }
-        return eliminado;
+        return vehiculoBuscado;
+    }
+
+    /**
+     * Devuelve el número de vehículos de una marca pasada como parámetro
+     */
+    private int getNumeroVehiculosMarca(Marca marca) {
+        int numVehiculos = 0;
+        for (Vehiculo vehiculo : vehiculos) {
+            if (vehiculo.getMarca() == marca) {
+                numVehiculos++;
+            }
+        }
+        return numVehiculos;
     }
 
     /**
@@ -47,65 +69,44 @@ public class Flota
      */
     public Marca marcaMayoritaria()
     {
-        Marca marca = null;
-        Marca[] nombreMarcas = {Marca.FORD, Marca.OPEL, Marca.CITROEN, Marca.FIAT};
-        int[] marcas = new int[4];
-        if (vehiculos.size() > 0) {
-            for (Vehiculo vehiculo : vehiculos) {
-                if (vehiculo.getMarca() == Marca.FORD) {
-                    marcas[0]++;
-                }
-                else if(vehiculo.getMarca() == Marca.OPEL) {
-                    marcas[1]++;
-                }
-                else if(vehiculo.getMarca() == Marca.CITROEN) {
-                    marcas[2]++;
-                }
-                else {
-                    marcas[3]++;
-                }
+        Marca marcaMayoritaria = null;
+        Marca[] marcas = Marca.values();
+        int mayor = 0;
+        for (Marca marca : marcas) {
+            int numVehiculos = getNumeroVehiculosMarca(marca);
+            if (numVehiculos > mayor) {
+                mayor = numVehiculos;
+                marcaMayoritaria = marca;
             }
-            int mayor = marcas[0];
-            boolean sonIguales = false;
-            int indexMayor = 0;
-            for (int i = 1; i < marcas.length; i++) {
-                if (marcas[i] > mayor) {
-                    mayor = marcas[i];
-                    sonIguales= false;
-                    indexMayor = i;
-                }
-                else if (marcas[i] == mayor) {
-                    sonIguales = true;
-                }
-            }
-            if (!sonIguales) {
-                marca = nombreMarcas[indexMayor];
-            }
+            else if (numVehiculos == mayor) {
+                marcaMayoritaria = null;
+            }           
         }
-        return marca;
+        return marcaMayoritaria;
     }
 
+    /**
+     * Devuelve verdadero si todos los vehiculos cumplen las medidas de seguridad (obviando a las furgonetas grandes)
+     * y falso en caso contrario. En caso de no haber vehículos devuelve verdadero.
+     */
     public boolean cumplenMedidas()
     {
-        //(((CentroEducativo)edificio).getEsPublico())
-        boolean cumplen = true;
-        for (int i = 0; i < vehiculos.size() && cumplen; i++) {
+        boolean cumplenMedidas = true;
+        for (int i = 0; i < vehiculos.size() && cumplenMedidas; i++) {
             if (!(vehiculos.get(i) instanceof FurgonetaGrande)) {
-                cumplen = ((CumpleMedidas)vehiculos.get(i)).cumpleMedidas(); 
+                cumplenMedidas = ((CumpleMedidas)vehiculos.get(i)).cumpleMedidas(); 
             }
         }
-        return cumplen;
+        return cumplenMedidas;
     }
 
-    public int[] getDatosVehiculo(int cod)
+    /**
+     * Recibe como parametro el identificador de un vehiculo y devuelve un array de enteros con todos los datos del vehiculo
+     * excepto la marca y si es articulado o no para los camiones.
+     */
+    public int[] getDatosVehiculo(int id)
     {
-        int[] datos = null;
-        for (Vehiculo vehiculo : vehiculos) {
-            if (vehiculo.getCodVehiculo() == cod) {
-                datos = vehiculo.getDatos();
-            }
-        }
-        return datos;
+        Vehiculo vehiculo = buscaVehiculo(id);
+        return (vehiculo != null) ? vehiculo.getDatos() : null;
     }
 }
-

@@ -7,7 +7,7 @@
  */
 public abstract class VehiculoPesado extends Vehiculo
 {
-    // instance variables - replace the example below with your own
+    // Peso en kg del VehiculoPesado
     private int peso;
 
     /**
@@ -20,20 +20,20 @@ public abstract class VehiculoPesado extends Vehiculo
     }
 
     /**
-     * Devuelve el peso del vehiculo
+     * Devuelve el peso en kg del vehiculo
      */
     public int getPeso()
     {
         return peso;
     }  
-    
-     public int[] getDatos()
+
+    /**
+     * Devuelve un int[] con los datos del VehiculoPesado
+     * [codigo, antigüedad, km, peso]
+     */
+    @Override
+    public int[] getDatos()
     {
-        int[] datos = new int[4];
-        datos[0] = getCodVehiculo();
-        datos[1] = getAntiguedad();
-        datos[2] = getKm();
-        datos[3] = getPeso();
-        return datos;
+        return new int[]{getCodVehiculo(), getAntiguedad(), getKm(), peso};
     }
 }

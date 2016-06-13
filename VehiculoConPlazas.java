@@ -18,7 +18,10 @@ public abstract class VehiculoConPlazas extends Vehiculo
         super(marca, antiguedad, km);
         this.numPlazas = numPlazas;
     }
-    
+
+    /**
+     * Deveulve el número de plazas para los VehiculosConPlazas
+     */
     public int getNumPlazas()
     {
         return numPlazas;

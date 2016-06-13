@@ -7,35 +7,39 @@
  */
 public class Coche extends VehiculoConPlazas implements CumpleMedidas
 {
+    /**
+     * Constructor for objects of class Coche
+     */
     public Coche(Marca marca, int antiguedad, int km, int numPlazas)
     {
         super(marca, antiguedad, km, numPlazas);
-
     }
 
-     public int pasaRevision()
-   {
-       final int REVISION_FORD = 2;
-       final int REVISION_NO_FORD = 1;
-       int anioRevision = REVISION_NO_FORD;
-       if (getMarca() == Marca.FORD) {
-           anioRevision = REVISION_FORD;
-       }
-       return anioRevision;
-   }
+    /**
+     * Devuelve un int que indica cada cuantos años tiene que pasar la revision
+     */
+    public int pasaRevision()
+    {
+        final int REVISION_FORD = 2;
+        final int REVISION_NO_FORD = 1;
+        return (getMarca() == Marca.FORD) ? REVISION_FORD: REVISION_NO_FORD; 
+    }
 
+    /**
+     * Devuelve true si el camión cumple las medidas de seguridad o false si no
+     */
+    @Override
     public boolean cumpleMedidas() {
-        return getNumPlazas() <= 5;
+        return getNumPlazas() <= CumpleMedidas.NUM_PLAZAS_COCHE;
     }
-    
+
+    /**
+     * Devuelve un int[] con los datos del Coche
+     * [codigo, antigüedad, km, numPlazas, revision]
+     */
+    @Override
     public int[] getDatos()
     {
-        int[] datos = new int[5];
-        datos[0] = getCodVehiculo();
-        datos[1] = getAntiguedad();
-        datos[2] = getKm();
-        datos[3] = getNumPlazas();
-        datos[4] = pasaRevision();
-        return datos;
+        return new int[]{getCodVehiculo(), getAntiguedad(), getKm(), getNumPlazas(), pasaRevision()};
     }
 }

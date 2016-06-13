@@ -7,29 +7,29 @@
  */
 public class FurgonetaPequena extends VehiculoConPlazas implements CumpleMedidas
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
     /**
-     * Constructor for objects of class FurgonetasPequenas
+     * Constructor for objects of class FurgonetaPequena
      */
     public FurgonetaPequena(Marca marca, int antiguedad, int km, int numPlazas)
     {
         super(marca, antiguedad, km, numPlazas);
-
     }
 
+    /**
+     * Devuelve true si cumple las medidas de seguridad o false si no
+     */
+    @Override
     public boolean cumpleMedidas() {
-        return getNumPlazas() <= 7;
+        return getNumPlazas() <= CumpleMedidas.NUM_PLAZAS_FURGO;
     }
-    
-     public int[] getDatos()
+
+    /**
+     * Devuelve un int[] con los datos del VehiculoPesado
+     * [codigo, antigüedad, km, numPlazas]
+     */
+    @Override
+    public int[] getDatos()
     {
-        int[] datos = new int[4];
-        datos[0] = getCodVehiculo();
-        datos[1] = getAntiguedad();
-        datos[2] = getKm();
-        datos[3] = getNumPlazas();
-        return datos;
+        return new int[]{getCodVehiculo(), getAntiguedad(), getKm(), getNumPlazas()};
     }
 }
