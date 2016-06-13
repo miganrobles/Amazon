@@ -65,18 +65,21 @@ public class Flota
                     marcas[3]++;
                 }
             }
-            int mayor = 0;
+            int mayor = marcas[0];
             boolean sonIguales = false;
-            for (int i = 1; i < marcas.length && !sonIguales; i++) {
+            int indexMayor = 0;
+            for (int i = 1; i < marcas.length; i++) {
                 if (marcas[i] > mayor) {
                     mayor = marcas[i];
+                    sonIguales= false;
+                    indexMayor = i;
                 }
                 else if (marcas[i] == mayor) {
                     sonIguales = true;
                 }
             }
             if (!sonIguales) {
-                marca = nombreMarcas[mayor];
+                marca = nombreMarcas[indexMayor];
             }
         }
         return marca;

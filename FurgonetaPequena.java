@@ -28,8 +28,8 @@ public class FurgonetaPequena extends VehiculoConPlazas implements CumpleMedidas
         int[] datos = new int[4];
         datos[0] = getCodVehiculo();
         datos[1] = getAntiguedad();
-        datos[3] = getKm();
-        datos[4] = getNumPlazas();
+        datos[2] = getKm();
+        datos[3] = getNumPlazas();
         return datos;
     }
 }
